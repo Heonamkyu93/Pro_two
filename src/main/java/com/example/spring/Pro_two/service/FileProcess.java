@@ -19,7 +19,7 @@ public class FileProcess {
             String uuid = UUID.randomUUID().toString();
             String saveName=uuid+am.get(i).getOriginalFilename();
             File file = new File(path,saveName);
-            if(!file.isDirectory())file.mkdir();
+           // if(!file.isDirectory())file.mkdir();
             try {
                 am.get(i).transferTo(file);
             } catch (IOException e) {

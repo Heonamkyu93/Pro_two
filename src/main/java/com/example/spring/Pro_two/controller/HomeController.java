@@ -33,8 +33,8 @@ public class HomeController {
         return "Form/joinForm";
     }
 
-    @PostMapping("/joinSave") //여기는 사진 한개만 받고 modelAttribute로 묶자 dto multi 필드 추가 메소드도
-    public String joinSave(@Valid @ModelAttribute MemberDto memberDto
+    @PostMapping("/joinSave")
+    public String joinSave(/*@Valid */@ModelAttribute MemberDto memberDto
         , @RequestPart ArrayList<MultipartFile> am) {
         memberService.joinSave(memberDto,am);
         return null;
