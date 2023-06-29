@@ -2,13 +2,9 @@ package com.example.spring.Pro_two.controller;
 
 import com.example.spring.Pro_two.domain.MemberDto;
 import com.example.spring.Pro_two.service.MemberService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -35,8 +31,9 @@ public class HomeController {
 
     @PostMapping("/joinSave")
     public String joinSave(/*@Valid */@ModelAttribute MemberDto memberDto
-        , @RequestPart ArrayList<MultipartFile> am) {
-        memberService.joinSave(memberDto,am);
+        , @RequestPart ArrayList<MultipartFile> am,
+                                      @RequestParam("twPicCat")String twPicCat) {
+        memberService.joinSave(memberDto,am,twPicCat);
         return null;
     }
 

@@ -4,7 +4,6 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
 @Data
 public class MemberDto {
 
@@ -29,10 +28,5 @@ public class MemberDto {
     @NotEmpty
     private String twNick;
 
-    private int twPicSeq;
-    private String twPicSer;
-    private String twPicOri;
-    private String twPicCat;
-    private MultipartFile imgFile;
 
 }
