@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class MemberService {
 
@@ -24,15 +25,30 @@ public class MemberService {
     }
 
 
-    public void joinSave(MemberDto memberDto, ArrayList<MultipartFile> am, String twPicCat) {
+    public String joinSave(MemberDto memberDto, ArrayList<MultipartFile> am, String twPicCat) {
         memberDto.setTwPwd(passwordEncoder.encode(memberDto.getTwPwd()));
-        memberRepository.joinSave(memberDto, am);
-
-        ArrayList<PicDto> picDtoArrayList = fileProcess.fileSave(am, twPicCat);
+        int re=memberRepository.joinSave(memberDto, am);
+        if(re==-1){
+            //   -1이면 멤버등록실패
+        return ""; //멤버등록실패시 여기서 String리턴해서 컨트롤러 리턴값을 대체해서 다른페이지로 보내기
+        } else {
+       /* ArrayList<PicDto> picDtoArrayList = fileProcess.fileSave(am, twPicCat);
         for (PicDto picDto : picDtoArrayList) {
             Optional.ofNullable(picDto.getTwPicOri()).flatMap(TwPicOri -> Optional.ofNullable(picDto.getTwPicSer())).map(TwPicSer ->
-             Optional.ofNullable(memberRepository.joinSavePic(picDto)));
+                    {
+                        return memberRepository.joinSavePic(picDto);
+                    }
+            );
         }
+       */
+            Stream<PicDto> picDtoStream = fileProcess.fileSave(am, twPicCat,re).stream();
+            picDtoStream.forEach(dto -> {
+                Optional<String> oriname = Optional.ofNullable(dto.getTwPicOri());
+                Optional<String> sername = Optional.ofNullable(dto.getTwPicSer());
+                oriname.ifPresent(ori -> sername.ifPresent(ser -> memberRepository.joinSavePic(dto)));
+            });
 
+        }
+        return "";
     }
 }

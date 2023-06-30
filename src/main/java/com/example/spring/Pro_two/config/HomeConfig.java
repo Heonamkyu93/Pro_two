@@ -17,15 +17,15 @@ public class HomeConfig {
     private final JdbcTemplate jdbcTemplate;
     private PasswordEncoder passwordEncoder;
 
-
-    public HomeConfig(DataSource dataSource, JdbcTemplate jdbcTemplate) {
+    public HomeConfig(DataSource dataSource, JdbcTemplate jdbcTemplate,PasswordEncoder passwordEncoder) {
         this.dataSource = dataSource;
         this.jdbcTemplate = jdbcTemplate;
+        this.passwordEncoder=passwordEncoder;
     }
 
     @Bean
     public MemberService memberService(){
-        return new MemberService(memberRepository(), fileProcess(), passwordEncoder);
+        return new MemberService(memberRepository(), fileProcess() ,passwordEncoder);
     }
     @Bean
     public MemberRepository memberRepository(){

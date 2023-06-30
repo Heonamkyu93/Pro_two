@@ -34,7 +34,7 @@ public class HomeController {
         , @RequestPart ArrayList<MultipartFile> am,
                                       @RequestParam("twPicCat")String twPicCat) {
         memberService.joinSave(memberDto,am,twPicCat);
-        return null;
+        return "tes";
     }
 
 
