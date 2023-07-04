@@ -30,17 +30,8 @@ public class MemberService {
         int re=memberRepository.joinSave(memberDto, am);
         if(re==-1){
             //   -1이면 멤버등록실패
-        return ""; //멤버등록실패시 여기서 String리턴해서 컨트롤러 리턴값을 대체해서 다른페이지로 보내기
+        return "/joinForm"; //멤버등록실패시 여기서 String리턴해서 컨트롤러 리턴값을 대체해서 다른페이지로 보내기
         } else {
-       /* ArrayList<PicDto> picDtoArrayList = fileProcess.fileSave(am, twPicCat);
-        for (PicDto picDto : picDtoArrayList) {
-            Optional.ofNullable(picDto.getTwPicOri()).flatMap(TwPicOri -> Optional.ofNullable(picDto.getTwPicSer())).map(TwPicSer ->
-                    {
-                        return memberRepository.joinSavePic(picDto);
-                    }
-            );
-        }
-       */
             Stream<PicDto> picDtoStream = fileProcess.fileSave(am, twPicCat,re).stream();
             picDtoStream.forEach(dto -> {
                 Optional<String> oriname = Optional.ofNullable(dto.getTwPicOri());

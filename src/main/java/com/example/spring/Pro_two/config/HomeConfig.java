@@ -17,6 +17,9 @@ public class HomeConfig {
     private final JdbcTemplate jdbcTemplate;
     private PasswordEncoder passwordEncoder;
 
+
+
+
     public HomeConfig(DataSource dataSource, JdbcTemplate jdbcTemplate,PasswordEncoder passwordEncoder) {
         this.dataSource = dataSource;
         this.jdbcTemplate = jdbcTemplate;

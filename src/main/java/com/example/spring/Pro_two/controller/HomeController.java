@@ -12,7 +12,6 @@ import java.util.ArrayList;
 @Controller
 public class HomeController {
     private final MemberService memberService;
-
     @Autowired
     HomeController(MemberService memberService) {
         this.memberService = memberService;
