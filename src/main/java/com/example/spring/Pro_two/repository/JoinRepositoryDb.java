@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class MemberRepositoryDb implements MemberRepository {
+public class JoinRepositoryDb implements JoinRepository {
 
     private JdbcTemplate jdbcTemplate;
     private DataSourceTransactionManager transactionManager;
@@ -36,7 +36,7 @@ public class MemberRepositoryDb implements MemberRepository {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public MemberRepositoryDb(JdbcTemplate jdbcTemplate) {
+    public JoinRepositoryDb(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

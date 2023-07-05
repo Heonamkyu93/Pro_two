@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class MemberDto {
 
-
+    private String code;
     private int twSeq;
     @NotEmpty
     private String twEmail;
